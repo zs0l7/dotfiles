@@ -44,9 +44,9 @@
  (setq org-capture-templates '(("i" "[inbox]" entry
                                (file "~/org/inbox.org")
                                "* SORT %i%?")
-                              ("t" "tickler" entry
+                              ("t" "[tickler]" entry
                                (file "~/org/tickler.org")
-                               "* DATE %i%? %^t")))
+                               "* DATE %i%? \n%^t")))
 
  (setq org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                            ("~/org/someday.org" :level . 1)
@@ -104,7 +104,8 @@
           ((org-agenda-compact-blocks t)))))
 
  (setq org-tags-column 0)
- (setq org-agenda-breadcrumbs-separator ":"))
+ (setq org-agenda-breadcrumbs-separator ":")
+ (setq org-agenda-dim-blocked-tasks nil))
 
 (setq lsp-clients-clangd-args '("-j=3"
                                 "--background-index"
