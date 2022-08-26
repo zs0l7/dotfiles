@@ -85,14 +85,14 @@
                  (org-agenda-start-day "")
                  (org-agenda-prefix-format "  %?-12t%s")
                  (org-agenda-current-time-string "> now <")))
-          (todo "SORT"
-                ((org-agenda-overriding-header "\nInbox:")
-                 (org-agenda-prefix-format "  %?-12t")))
           (todo "TODO"
                 ((org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)
                  (org-agenda-overriding-header "\nNext actions:")
                  (org-agenda-prefix-format "  %-60b%? e")))
-          (stuck ""
+          (todo "SORT"
+                ((org-agenda-overriding-header "\nInbox:")
+                 (org-agenda-prefix-format "  %?-12t")))
+         (stuck ""
                  ((org-agenda-overriding-header "\nStuck Projects:")
                   (org-agenda-prefix-format "  ")))
           (todo "WAIT"
