@@ -55,7 +55,7 @@
  (setq-default bookmark-set-fringe-mark nil)
  (setq org-log-done 'time)
  (setq org-archive-location "~/org/archive/archive.org::datetree/")
- (setq org-archive-save-context-info '(time olpath itags ltags))
+ (setq org-archive-save-context-info '(olpath itags ltags))
  (setq org-startup-folded t)
  (setq org-todo-repeat-to-state t)
  (setq org-stuck-projects '("+LEVEL=1/PROJ" ("TODO" "WAIT")))
@@ -84,30 +84,30 @@
          ((agenda ""
                 ((org-agenda-span 'day)
                  (org-agenda-start-day "")
-                 (org-agenda-prefix-format "  %?-12t%s")
+                 (org-agenda-prefix-format " %?-12t%s")
                  (org-agenda-current-time-string "> now <")
                  (org-agenda-skip-scheduled-if-done t)
                  (org-agenda-skip-deadline-if-done t)))
           (todo "TODO"
                 ((org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)
                  (org-agenda-overriding-header "\nNext actions:")
-                 (org-agenda-prefix-format "  %-60b%? e")))
+                 (org-agenda-prefix-format " %?b%? e")))
           (todo "SORT"
                 ((org-agenda-overriding-header "\nInbox:")
-                 (org-agenda-prefix-format "  %?-12t")))
+                 (org-agenda-prefix-format " %?-12t")))
           (stuck ""
                 ((org-agenda-overriding-header "\nStuck Projects:")
-                 (org-agenda-prefix-format "  ")))
+                 (org-agenda-prefix-format " ")))
           (todo "WAIT"
                 ((org-agenda-overriding-header "\nWaiting list:")
-                 (org-agenda-prefix-format "  ")))
+                 (org-agenda-prefix-format " ")))
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "\nCompleted today:")
-                 (org-agenda-prefix-format "  "))))
+                 (org-agenda-prefix-format " "))))
          ((org-agenda-compact-blocks t)))))
 
  (setq org-tags-column 0)
- (setq org-agenda-breadcrumbs-separator ":")
+ (setq org-agenda-breadcrumbs-separator ": ")
  (setq org-agenda-dim-blocked-tasks nil))
 
 (setq lsp-clients-clangd-args '("-j=3"
@@ -118,3 +118,5 @@
                                 "--header-insertion-decorators=0"))
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
+; for uni
+(setq compile-command "gcc -Wall -pedantic -o ")
