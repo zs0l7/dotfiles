@@ -30,6 +30,7 @@
            "DATE(D)"
            "|"
            "DONE(d)"
+           "DPROJ(P)"
            "CANC(c)"))
         org-todo-keyword-faces
         '(("PROJ" . +org-todo-project)
