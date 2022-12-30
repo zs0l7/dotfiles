@@ -12,7 +12,7 @@
 (setq org-directory "~/org/")
 (setq org-roam-directory (file-truename "~/org/roam"))
 
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 
@@ -85,30 +85,30 @@
          ((agenda ""
                 ((org-agenda-span 'day)
                  (org-agenda-start-day "")
-                 (org-agenda-prefix-format " %?-12t%s")
+                 (org-agenda-prefix-format "  %?-12t%s")
                  (org-agenda-current-time-string "> now <")
                  (org-agenda-skip-scheduled-if-done t)
                  (org-agenda-skip-deadline-if-done t)))
           (todo "TODO"
                 ((org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)
                  (org-agenda-overriding-header "\nNext actions:")
-                 (org-agenda-prefix-format " %?b%? e")))
+                 (org-agenda-prefix-format "  %?b%? e")))
           (todo "SORT"
                 ((org-agenda-overriding-header "\nInbox:")
-                 (org-agenda-prefix-format " %?-12t")))
+                 (org-agenda-prefix-format "  %?-12t")))
           (stuck ""
                 ((org-agenda-overriding-header "\nStuck Projects:")
-                 (org-agenda-prefix-format " ")))
+                 (org-agenda-prefix-format "  ")))
           (todo "WAIT"
                 ((org-agenda-overriding-header "\nWaiting list:")
-                 (org-agenda-prefix-format " ")))
+                 (org-agenda-prefix-format "  ")))
           (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "\nCompleted today:")
-                 (org-agenda-prefix-format " "))))
+                 (org-agenda-prefix-format "  "))))
          ((org-agenda-compact-blocks t)))))
 
  (setq org-tags-column 0)
- (setq org-agenda-breadcrumbs-separator ": ")
+ (setq org-agenda-breadcrumbs-separator "/")
  (setq org-agenda-dim-blocked-tasks nil))
 
 (setq lsp-clients-clangd-args '("-j=3"
@@ -120,4 +120,4 @@
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
 ; for uni
-(setq compile-command "gcc -Wall -pedantic -o ")
+(setq compile-command "gcc -Wall -std=c99 -pedantic -o ")
