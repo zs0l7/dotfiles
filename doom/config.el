@@ -23,20 +23,10 @@
  (setq org-todo-keywords
         '((sequence
            "TODO(t)"
-           "PROJ(p)"
-           "LOOP(r)"
-           "WAIT(w)"
-           "SORT(s)"
-           "DATE(D)"
+           "NEXT(n)"
+           "TICK(T)"
            "|"
-           "DONE(d)"
-           "DPROJ(P)"
-           "CANC(c)"))
-        org-todo-keyword-faces
-        '(("PROJ" . +org-todo-project)
-          ("WAIT" . +org-todo-onhold)
-          ("SORT" . +org-todo-onhold)
-          ("CANC" . +org-todo-cancel)))
+           "DONE(d)")))
 
  (setq org-agenda-files '("~/org/inbox.org"
                           "~/org/gtd.org"
@@ -44,10 +34,7 @@
 
  (setq org-capture-templates '(("i" "[inbox]" entry
                                (file "~/org/inbox.org")
-                               "* SORT %i%?")
-                              ("t" "[tickler]" entry
-                               (file "~/org/tickler.org")
-                               "* DATE %i%? \n%^t")))
+                               "* %?")))
 
  (setq org-refile-targets '(("~/org/gtd.org" :maxlevel . 3)
                            ("~/org/someday.org" :level . 1)
@@ -55,54 +42,38 @@
 
  (setq-default bookmark-set-fringe-mark nil)
  (setq org-log-done 'time)
- (setq org-archive-location "~/org/archive/archive.org::datetree/")
+ (setq org-archive-location "~/org/archive/2023-archive.org::datetree/")
  (setq org-archive-save-context-info '(olpath itags ltags))
  (setq org-startup-folded t)
  (setq org-todo-repeat-to-state t)
- (setq org-stuck-projects '("+LEVEL=1/PROJ" ("TODO" "WAIT")))
-
- (defun my-org-agenda-skip-all-siblings-but-first ()
-   "Skip all but the first non-done entry."
-   (let (should-skip-entry)
-     (unless (org-current-is-todo)
-       (setq should-skip-entry t))
-     (save-excursion
-       (while (and (not should-skip-entry) (org-goto-sibling t))
-         (when (and (org-current-is-todo) (not (org-has-tag-single)))
-           (setq should-skip-entry t))))
-     (when should-skip-entry
-       (or (outline-next-heading)
-           (goto-char (point-max))))))
-
- (defun org-current-is-todo ()
-   (string= "TODO" (org-get-todo-state)))
-
- (defun org-has-tag-single ()
-   (member "single" (org-get-tags)))
+ (setq org-stuck-projects '("+LEVEL=1+project/-DONE" ("TODO" "NEXT")))
+ (setq org-tags-exclude-from-inheritance '("project"))
 
  (setq org-agenda-custom-commands
       '(("g" "GTD agenda"
          ((agenda ""
                 ((org-agenda-span 'day)
                  (org-agenda-start-day "")
-                 (org-agenda-prefix-format "  %?-12t%s")
+                 (org-agenda-prefix-format "  %s%?b%?-12t")
                  (org-agenda-current-time-string "> now <")
                  (org-agenda-skip-scheduled-if-done t)
                  (org-agenda-skip-deadline-if-done t)))
-          (todo "TODO"
-                ((org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first)
-                 (org-agenda-overriding-header "\nNext actions:")
+          (todo "NEXT"
+                ((org-agenda-overriding-header "\nNext actions:")
                  (org-agenda-prefix-format "  %?b%? e")))
-          (todo "SORT"
-                ((org-agenda-overriding-header "\nInbox:")
-                 (org-agenda-prefix-format "  %?-12t")))
-          (stuck ""
-                ((org-agenda-overriding-header "\nStuck Projects:")
+           (todo "TODO"
+                ((org-agenda-overriding-header "\nTasks:")
+                 (org-agenda-prefix-format "  %?b%? e")))
+         (stuck ""
+                ((org-agenda-overriding-header "\nStuck projects:")
                  (org-agenda-prefix-format "  ")))
-          (todo "WAIT"
-                ((org-agenda-overriding-header "\nWaiting list:")
-                 (org-agenda-prefix-format "  ")))
-          (tags "CLOSED>=\"<today>\""
+        (tags "inbox"
+              ((org-agenda-overriding-header "\nInbox:")
+               (org-agenda-prefix-format "  ")))
+         (tags "wait"
+              ((org-agenda-overriding-header "\nWaiting list:")
+               (org-agenda-prefix-format "  ")))
+       (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "\nCompleted today:")
                  (org-agenda-prefix-format "  "))))
          ((org-agenda-compact-blocks t)))))
