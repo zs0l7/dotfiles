@@ -57,25 +57,32 @@
                  (org-agenda-prefix-format "  %s%?b%?-12t")
                  (org-agenda-current-time-string "> now <")
                  (org-agenda-skip-scheduled-if-done t)
-                 (org-agenda-skip-deadline-if-done t)))
+                 (org-agenda-skip-deadline-if-done t)
+                 (org-agenda-files '("~/org/gtd.org" "~/org/tickler.org"))))
           (todo "NEXT"
                 ((org-agenda-overriding-header "\nNext actions:")
-                 (org-agenda-prefix-format "  %?b%? e")))
+                 (org-agenda-prefix-format "  %?b%? e")
+                 (org-agenda-files '("~/org/gtd.org"))))
            (todo "TODO"
                 ((org-agenda-overriding-header "\nTasks:")
-                 (org-agenda-prefix-format "  %?b%? e")))
+                 (org-agenda-prefix-format "  %?b%? e")
+                 (org-agenda-files '("~/org/gtd.org"))))
          (stuck ""
                 ((org-agenda-overriding-header "\nStuck projects:")
-                 (org-agenda-prefix-format "  ")))
+                 (org-agenda-prefix-format "  ")
+                 (org-agenda-files '("~/org/gtd.org"))))
         (tags "inbox"
               ((org-agenda-overriding-header "\nInbox:")
-               (org-agenda-prefix-format "  ")))
+               (org-agenda-prefix-format "  ")
+               (org-agenda-files '("~/org/inbox.org"))))
          (tags "wait"
               ((org-agenda-overriding-header "\nWaiting list:")
-               (org-agenda-prefix-format "  ")))
+               (org-agenda-prefix-format "  ")
+               (org-agenda-files '("~/org/gtd.org"))))
        (tags "CLOSED>=\"<today>\""
                 ((org-agenda-overriding-header "\nCompleted today:")
-                 (org-agenda-prefix-format "  "))))
+                 (org-agenda-prefix-format "  ")
+                 (org-agenda-files '("~/org/gtd.org" "~/org/tickler.org")))))
          ((org-agenda-compact-blocks t)))))
 
  (setq org-tags-column 0)
