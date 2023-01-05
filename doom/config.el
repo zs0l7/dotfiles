@@ -58,6 +58,7 @@
                  (org-agenda-current-time-string "> now <")
                  (org-agenda-skip-scheduled-if-done t)
                  (org-agenda-skip-deadline-if-done t)
+                 (org-agenda-skip-timestamp-if-done t)
                  (org-agenda-files '("~/org/gtd.org" "~/org/tickler.org"))))
           (todo "NEXT"
                 ((org-agenda-overriding-header "\nNext actions:")
